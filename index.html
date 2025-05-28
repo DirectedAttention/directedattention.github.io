@@ -3,10 +3,112 @@
 <head>
   <meta charset="UTF-8">
   <title>Linguistic Agents Ltd.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      background: white;
+      color: #222;
+    }
+    header {
+      background: #0f52ba;
+      color: #fff;
+      padding: 30px 0 15px 0;
+      text-align: center;
+    }
+    nav {
+      margin: 0;
+      background: #bababa;
+      padding: 10px 0;
+      text-align: center;
+    }
+    nav a {
+      color: #0f52ba;
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: 500;
+      font-size: 1.05em;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 750px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 24px 30px;
+      border-radius: 14px;
+      box-shadow: 0 2px 18px 0 #bababa;
+    }
+    h1, h2 {
+      margin-top: 0;
+      font-weight: 700;
+    }
+    h2 {
+      color: #0f52ba;
+      margin-bottom: 10px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    .contact {
+      margin-top: 30px;
+      font-size: 1.1em;
+    }
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      background: #bababa;
+      color: #525252;
+      font-size: 0.96em;
+      margin-top: 40px;
+    }
+    @media (max-width: 600px) {
+      .container { padding: 12px 4vw; }
+      nav a { margin: 0 8px; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to Linguistic Agents Ltd.</h1>
-  <p>AI-driven language technology.</p>
-  <p>Contact: info@linguisticagents.com</p>
+  <header>
+    <h1>Linguistic Agents Ltd.</h1>
+    <div>AI-driven Language Technology</div>
+  </header>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#services">Solutions</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="container">
+    <section id="about">
+      <h2>About Us</h2>
+      <p>
+        <strong>Linguistic Agents Ltd.</strong> is an innovative company focused on advancing language technology through artificial intelligence, linguistics, and agent-based systems. 
+      </p>
+    </section>
+
+    <section id="services">
+      <h2>Our Solutions</h2>
+      <ul>
+        <li><strong>Natural Language Processing</strong> – AI for language understanding and generation</li>
+        <li><strong>Conversational Agents</strong> – Multi-agent dialog systems and chatbots</li>
+        <li><strong>Semantic Search & Retrieval</strong> – Enhanced knowledge management for business</li>
+        <li><strong>Custom Language Technology</strong> – Tailored AI for specific domains</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Contact</h2>
+      <p>
+        Email: <a href="mailto:info@linguisticagents.com">info@linguisticagents.com</a><br>
+        Address: Ra'anana, Israel<br>
+        <!-- Add phone if you wish -->
+      </p>
+    </section>
+  </div>
+  <footer>
+    &copy; 2025 Linguistic Agents Ltd. All rights reserved.
+  </footer>
 </body>
 </html>
