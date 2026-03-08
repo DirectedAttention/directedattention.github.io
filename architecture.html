@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Architecture | Multi-agent graph runtime</title>
+  <meta name="description" content="Architecture of the multi-agent graph runtime: environments, agents, graph structure, small neural networks, coordination, and verification.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page">
+
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="architecture.html">Architecture</a>
+    </nav>
+
+    <section class="hero">
+      <div class="eyebrow">Architecture</div>
+      <h1>How the runtime is structured</h1>
+      <p class="lead">
+        A multi-agent system becomes real only when agents, environments, and relations
+        are given explicit structured form.
+      </p>
+
+      <p>
+        The runtime is built around a simple distinction. An environment is not a pile of prompts,
+        tools, and text buffers. It is a structured object. An agent is not merely a prompt with a
+        model attached. It is an environment with an LLM. This distinction is the basis of the
+        architecture described below.
+      </p>
+    </section>
+
+    <section>
+      <h2>The core definition</h2>
+
+      <div class="formula">
+        <strong>Environment = graph structure + small neural networks</strong><br>
+        <strong>Agent = environment + LLM</strong>
+      </div>
+
+      <p>
+        This formula is intentionally simple. It separates the structured substrate from the
+        high-level language-capable component. The environment carries graph structure and narrower
+        learned components. The agent is formed when an LLM is added to that environment.
+      </p>
+
+      <p>
+        This is not just a convenient decomposition. It reflects a design principle. The smartest
+        model should orchestrate. Smaller specialized neural systems should handle narrower work
+        within a structured environment. A runtime built this way is easier to extend, easier to
+        analyze, and better suited to explicit coordination than a system in which one large model
+        is expected to do everything.
+      </p>
+
+      <div class="quote">
+        The smartest model should orchestrate. Smaller specialized networks should do the chores.
+      </div>
+    </section>
+
+    <section>
+      <h2>Why current multi-agent design is weak</h2>
+
+      <p>
+        Many systems called multi-agent today are not truly multi-agent in a serious architectural
+        sense. They are collections of endpoints exchanging messages. They may use several prompts,
+        several roles, several model calls, and several tool interfaces, but none of that is enough
+        by itself.
+      </p>
+
+      <p>
+        Real multi-agent design begins only when the participating units are actual agents. An
+        actual agent is not defined only by output behavior. It must carry structured knowledge of
+        the task, of the environment, and of other agents. Without that, a so-called multi-agent
+        system is often just message traffic with labels attached.
+      </p>
+
+      <div class="highlight-block">
+        Current AI builders often multiply agents before defining agency.
+      </div>
+
+      <p>
+        The runtime is designed as a response to that weakness. It does not start from message
+        passing. It starts from explicit environments and explicit agent structure.
+      </p>
+    </section>
+
+    <section>
+      <h2>Agent models of other agents</h2>
+
+      <p>
+        One of the practical engineering principles behind the runtime is that each agent should
+        track not only the task, but what other agents know and what they think fellow agents know
+        about the task. This is the beginning of genuine multi-agent coordination.
+      </p>
+
+      <p>
+        In informal terms, the structure is close to a three-hop relation:
+        I know what you think I know about the object, state, or task we are jointly dealing with.
+        This is not presented here as philosophical decoration. It is a practical design principle.
+        Better coordination depends on explicit agent models, not only on exchanged messages.
+      </p>
+
+      <div class="quote">
+        Coordination improves when agents model each other, not just message each other.
+      </div>
+
+      <p>
+        Once these relations are part of the runtime, coordination becomes something the system can
+        represent, inspect, and improve. Without them, coordination remains shallow and fragile.
+      </p>
+    </section>
+
+    <section>
+      <h2>Why graph structure is central</h2>
+
+      <p>
+        Graph structure is not an implementation detail. It is one of the foundations of the
+        runtime. A graph makes it possible to represent entities, relations, task states,
+        dependencies, and agent models explicitly, instead of leaving them dissolved in raw text.
+      </p>
+
+      <p>
+        This matters because explicit relation is what makes both coordination and verification more
+        realistic. A graph is not merely a storage format. It is part of the representational
+        substrate in which the environment exists.
+      </p>
+
+      <p>
+        When environments are graph-structured, an agent can carry a usable internal world rather
+        than only a rolling conversational surface. That in turn makes the system more teachable,
+        more transferable, and more inspectable.
+      </p>
+    </section>
+
+    <section>
+      <h2>Small neural networks inside the environment</h2>
+
+      <p>
+        The runtime does not assume that everything valuable must live inside the LLM. Narrower
+        learned behavior can and should be carried by smaller neural systems inside the structured
+        environment itself. These systems can specialize in tasks that do not require the full
+        generality of a top-level language model.
+      </p>
+
+      <p>
+        This gives the architecture an important division of labor. The environment can learn and
+        preserve narrower structures and behaviors, while the LLM can reason, orchestrate,
+        communicate, and mediate across those structures. This is one reason the system is not a
+        standard LLM wrapper. The environment has learned content of its own.
+      </p>
+
+      <div class="info-block">
+        The environment is not passive context. It is an active structured substrate with its own learned components.
+      </div>
+    </section>
+
+    <section>
+      <h2>Reinforcement learning for graph neural networks</h2>
+
+      <p>
+        Reinforcement learning is one of the pillars of the architecture, but not only in the usual
+        sense of RL applied around language models. A second pillar is RL applied to Graph Neural
+        Networks. If the runtime is fundamentally structured around graph environments, then the
+        systems learning those environments must also be trained and optimized as structured
+        learners.
+      </p>
+
+      <p>
+        This matters because a graph environment is not just something to be described in language.
+        It is something to be shaped, evaluated, and improved in its own right. Graph-based learning
+        therefore becomes part of the architecture itself, not a side topic.
+      </p>
+
+      <p>
+        In that sense, the runtime is dual-track from the beginning. LLMs matter as participating
+        agents. RL-trained GNNs matter as learners of structured environments. The architecture
+        requires both.
+      </p>
+    </section>
+
+    <section>
+      <h2>From coordination to verification</h2>
+
+      <p>
+        The first gain from this architecture is better coordination. When agents have structured
+        environments and explicit models of other agents, they can coordinate more reliably around a
+        shared task. That is the immediate practical benefit.
+      </p>
+
+      <p>
+        The second gain is stronger verification. Once structure is explicit enough, more of the
+        system’s behavior can be traced, inspected, and checked automatically. This matters for
+        ordinary development workflows, but it matters even more for future uses where legal and
+        commercial trust become central.
+      </p>
+
+      <div class="pillars">
+        <div class="pillar">
+          <strong>Coordination first</strong><br>
+          Explicit agent models make cooperation less fragile.
+        </div>
+        <div class="pillar">
+          <strong>Verification next</strong><br>
+          Explicit structure opens the way to automatic checking.
+        </div>
+        <div class="pillar">
+          <strong>Deployment control</strong><br>
+          The runtime is meant for the user’s own cloud or machine.
+        </div>
+        <div class="pillar">
+          <strong>Layered intelligence</strong><br>
+          High-level orchestration sits above narrower learned systems.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Agentic Form and partial knowability</h2>
+
+      <p>
+        The runtime is connected to a broader claim about intelligence. We do not assume that the
+        internal form of agency must be treated as a totally unknown latent to be discovered blindly
+        from opaque optimization. On the contrary, important aspects of Agentic Form are already
+        partly knowable.
+      </p>
+
+      <p>
+        We know things about agentive structure from action itself, but also from advanced
+        linguistic semantics: presuppositions, implicatures, hierarchy, accommodation, and related
+        forms of structured meaning. That does not remove the need for learning. It changes the
+        architecture by allowing guided structure instead of pure guesswork.
+      </p>
+
+      <div class="quote">
+        Agentic Form is not fully hidden. Much of it is already visible in action and semantics.
+      </div>
+    </section>
+
+    <section>
+      <h2>Portable and teachable competence</h2>
+
+      <p>
+        One of the long-term aims of the runtime is to make competence less opaque and less tied to
+        one isolated model instance. An agent that carries an environment carries structured
+        competence with it. If an agent can perform a task well enough, it should increasingly be
+        able to help transfer that competence to other agents.
+      </p>
+
+      <p>
+        This is one reason the architecture treats environments as substantial objects rather than
+        disposable context. A carried environment can become a medium of portability, reuse,
+        teaching, and verification.
+      </p>
+
+      <div class="quote">
+        You only know what you can teach.
+      </div>
+    </section>
+
+    <section>
+      <h2>Deployment model</h2>
+
+      <p>
+        The runtime is intended to run under the user’s control. That may mean deployment in the
+        user’s own cloud, or on the user’s own machine. The goal is not to require customers to
+        surrender their project knowledge to an externally hosted black box.
+      </p>
+
+      <p>
+        This deployment model fits the rest of the architecture. If coordination, structure, and
+        verification matter, control over execution also matters. Trust is not only about answer
+        quality. It is also about where the system runs and who controls the state it carries.
+      </p>
+    </section>
+
+    <section>
+      <h2>Why this architecture now</h2>
+
+      <p>
+        Earlier generations of models could help describe parts of this vision, but they were too
+        weak to help build such a runtime fast enough. That has changed. Current models are finally
+        strong enough to participate in constructing the architecture that goes beyond ordinary
+        prompt-centric systems.
+      </p>
+
+      <p>
+        In that sense, current frontier models are not the final architecture. They are participants
+        in building the next one.
+      </p>
+    </section>
+
+    <section>
+      <h2>Next</h2>
+
+      <p>
+        Return to the homepage for the short version, or continue into essays and research notes
+        that explain the broader theoretical direction behind the runtime.
+      </p>
+
+      <p>
+        <a class="button primary" href="index.html">Back to home</a>
+      </p>
+    </section>
+
+    <div class="footer-note">
+      Multi-agent graph runtime: structured environments, explicit agent models, smaller learned systems, and deployment under the builder’s control.
+    </div>
+
+  </div>
+</body>
+</html>
+

@@ -1,0 +1,258 @@
+:root {
+  --brand-blue: #489add;
+  --brand-orange: #dd8b48;
+  --brand-lime: #9add48;
+  --brand-pink: #dd489a;
+  --brand-green: #48dd8b;
+  --brand-cyan: #48ddd6;
+  --brand-yellow: #ddd648;
+
+  --text: #1f2933;
+  --text-soft: #4b5563;
+  --bg: #ffffff;
+  --bg-soft: #f7fbfe;
+  --border: #d7e3ee;
+  --card-bg: #fbfdff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 48px 24px 80px 24px;
+}
+
+h1, h2, h3 {
+  line-height: 1.2;
+  margin-top: 0;
+  color: #111827;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+h2 {
+  font-size: 1.9rem;
+  margin-top: 56px;
+  margin-bottom: 16px;
+  color: var(--brand-blue);
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+
+p {
+  margin: 0 0 18px 0;
+  font-size: 1.05rem;
+}
+
+a {
+  color: var(--brand-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.hero {
+  margin-bottom: 52px;
+  padding: 8px 0 12px 0;
+  border-top: 6px solid var(--brand-blue);
+}
+
+.eyebrow {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--brand-orange);
+  margin-bottom: 14px;
+}
+
+.lead {
+  font-size: 1.3rem;
+  color: var(--text-soft);
+  margin-bottom: 28px;
+  max-width: 860px;
+}
+
+.actions {
+  margin-top: 28px;
+  margin-bottom: 12px;
+}
+
+.button {
+  display: inline-block;
+  padding: 12px 18px;
+  margin-right: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: 0.15s ease;
+  border: 2px solid var(--brand-blue);
+}
+
+.button.primary {
+  background: var(--brand-blue);
+  color: white;
+}
+
+.button.primary:hover {
+  background: #377fb8;
+  border-color: #377fb8;
+  text-decoration: none;
+}
+
+.button.secondary {
+  background: white;
+  color: var(--brand-blue);
+}
+
+.button.secondary:hover {
+  background: var(--bg-soft);
+  text-decoration: none;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 22px;
+  margin-top: 28px;
+  margin-bottom: 8px;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-top: 5px solid var(--brand-blue);
+  border-radius: 10px;
+  padding: 22px;
+}
+
+.card:nth-child(2) {
+  border-top-color: var(--brand-green);
+}
+
+.card:nth-child(3) {
+  border-top-color: var(--brand-orange);
+}
+
+.formula {
+  margin: 28px 0;
+  padding: 18px 22px;
+  background: linear-gradient(90deg, rgba(72,154,221,0.10), rgba(72,221,139,0.08));
+  border-left: 5px solid var(--brand-green);
+  border-radius: 8px;
+  font-size: 1.08rem;
+}
+
+.quote {
+  margin: 28px 0;
+  padding: 18px 22px;
+  border-left: 5px solid var(--brand-pink);
+  background: rgba(221,72,154,0.06);
+  border-radius: 8px;
+  font-size: 1.08rem;
+  color: #374151;
+}
+
+.highlight-block {
+  margin-top: 22px;
+  padding: 18px 22px;
+  background: rgba(221,214,72,0.12);
+  border-left: 5px solid var(--brand-yellow);
+  border-radius: 8px;
+}
+
+.info-block {
+  margin: 24px 0;
+  padding: 18px 22px;
+  background: rgba(72,221,214,0.10);
+  border-left: 5px solid var(--brand-cyan);
+  border-radius: 8px;
+}
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.pillar {
+  padding: 18px 20px;
+  border-radius: 10px;
+  color: #173042;
+  background: rgba(72,221,214,0.10);
+  border: 1px solid rgba(72,221,214,0.35);
+}
+
+.pillar:nth-child(2) {
+  background: rgba(154,221,72,0.10);
+  border-color: rgba(154,221,72,0.35);
+}
+
+.pillar:nth-child(3) {
+  background: rgba(221,139,72,0.10);
+  border-color: rgba(221,139,72,0.35);
+}
+
+.pillar:nth-child(4) {
+  background: rgba(72,154,221,0.10);
+  border-color: rgba(72,154,221,0.35);
+}
+
+.nav {
+  margin-bottom: 28px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav a {
+  margin-right: 18px;
+  font-weight: 700;
+}
+
+.footer-note {
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 2px solid var(--border);
+  color: var(--text-soft);
+  font-size: 0.98rem;
+}
+
+@media (max-width: 720px) {
+  h1 {
+    font-size: 2.3rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  .lead {
+    font-size: 1.14rem;
+  }
+}
