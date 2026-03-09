@@ -3,475 +3,109 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Multi-agent graph runtime</title>
-  <meta name="description" content="Build real multi-agent systems with structured environments, explicit agent models, and deployment under your control.">
-
-  <style>
-    :root {
-      --brand-blue: #489add;
-      --brand-orange: #dd8b48;
-      --brand-lime: #9add48;
-      --brand-pink: #dd489a;
-      --brand-green: #48dd8b;
-      --brand-cyan: #48ddd6;
-      --brand-yellow: #ddd648;
-
-      --text: #1f2933;
-      --text-soft: #4b5563;
-      --bg: #ffffff;
-      --bg-soft: #f7fbfe;
-      --border: #d7e3ee;
-      --card-bg: #fbfdff;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.65;
-      color: var(--text);
-      background: var(--bg);
-    }
-
-    .page {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 48px 24px 80px 24px;
-    }
-
-    h1, h2, h3 {
-      line-height: 1.2;
-      margin-top: 0;
-      color: #111827;
-    }
-
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 16px;
-    }
-
-    h2 {
-      font-size: 1.9rem;
-      margin-top: 56px;
-      margin-bottom: 16px;
-      color: var(--brand-blue);
-    }
-
-    h3 {
-      font-size: 1.2rem;
-      margin-bottom: 12px;
-    }
-
-    p {
-      margin: 0 0 18px 0;
-      font-size: 1.05rem;
-    }
-
-    a {
-      color: var(--brand-blue);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .hero {
-      margin-bottom: 52px;
-      padding: 8px 0 12px 0;
-      border-top: 6px solid var(--brand-blue);
-    }
-
-    .eyebrow {
-      display: inline-block;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--brand-orange);
-      margin-bottom: 14px;
-    }
-
-    .lead {
-      font-size: 1.3rem;
-      color: var(--text-soft);
-      margin-bottom: 28px;
-      max-width: 860px;
-    }
-
-    .actions {
-      margin-top: 28px;
-      margin-bottom: 12px;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 12px 18px;
-      margin-right: 12px;
-      margin-bottom: 12px;
-      border-radius: 8px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: 0.15s ease;
-      border: 2px solid var(--brand-blue);
-    }
-
-    .button.primary {
-      background: var(--brand-blue);
-      color: white;
-    }
-
-    .button.primary:hover {
-      background: #377fb8;
-      border-color: #377fb8;
-      text-decoration: none;
-    }
-
-    .button.secondary {
-      background: white;
-      color: var(--brand-blue);
-    }
-
-    .button.secondary:hover {
-      background: var(--bg-soft);
-      text-decoration: none;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 22px;
-      margin-top: 28px;
-      margin-bottom: 8px;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-top: 5px solid var(--brand-blue);
-      border-radius: 10px;
-      padding: 22px;
-    }
-
-    .card:nth-child(2) {
-      border-top-color: var(--brand-green);
-    }
-
-    .card:nth-child(3) {
-      border-top-color: var(--brand-orange);
-    }
-
-    .formula {
-      margin: 28px 0;
-      padding: 18px 22px;
-      background: linear-gradient(90deg, rgba(72,154,221,0.10), rgba(72,221,139,0.08));
-      border-left: 5px solid var(--brand-green);
-      border-radius: 8px;
-      font-size: 1.08rem;
-    }
-
-    .quote {
-      margin: 28px 0;
-      padding: 18px 22px;
-      border-left: 5px solid var(--brand-pink);
-      background: rgba(221,72,154,0.06);
-      border-radius: 8px;
-      font-size: 1.08rem;
-      color: #374151;
-    }
-
-    .highlight-block {
-      margin-top: 22px;
-      padding: 18px 22px;
-      background: rgba(221,214,72,0.12);
-      border-left: 5px solid var(--brand-yellow);
-      border-radius: 8px;
-    }
-
-    ul {
-      padding-left: 22px;
-      margin-bottom: 18px;
-    }
-
-    li {
-      margin-bottom: 10px;
-    }
-
-    .pillars {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-      margin-top: 20px;
-    }
-
-    .pillar {
-      padding: 18px 20px;
-      border-radius: 10px;
-      color: #173042;
-      background: rgba(72,221,214,0.10);
-      border: 1px solid rgba(72,221,214,0.35);
-    }
-
-    .pillar:nth-child(2) {
-      background: rgba(154,221,72,0.10);
-      border-color: rgba(154,221,72,0.35);
-    }
-
-    .pillar:nth-child(3) {
-      background: rgba(221,139,72,0.10);
-      border-color: rgba(221,139,72,0.35);
-    }
-
-    .pillar:nth-child(4) {
-      background: rgba(72,154,221,0.10);
-      border-color: rgba(72,154,221,0.35);
-    }
-
-    .footer-note {
-      margin-top: 64px;
-      padding-top: 24px;
-      border-top: 2px solid var(--border);
-      color: var(--text-soft);
-      font-size: 0.98rem;
-    }
-
-    @media (max-width: 720px) {
-      h1 {
-        font-size: 2.3rem;
-      }
-
-      h2 {
-        font-size: 1.6rem;
-      }
-
-      .lead {
-        font-size: 1.14rem;
-      }
-    }
-  </style>
+  <title>Linguistic Agents Ltd</title>
+  <meta name="description" content="A new architecture for real multi-agent intelligence.">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="page">
 
-    <section class="hero">
-      <div class="eyebrow">Technical AI Infrastructure</div>
-      <h1>Multi-agent graph runtime</h1>
-      <p class="lead">
-        Build real multi-agent systems with structured environments, explicit agent models,
-        and deployment under your control.
-      </p>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="architecture.html">Architecture</a>
+      <a href="contact.html">Contact</a>
+    </nav>
 
-      <p>
-        Current multi-agent systems are often little more than message-passing between weakly
-        modeled endpoints. They may assign different names to different model calls, but that
-        alone does not create genuine multi-agent intelligence. Real multi-agent design begins
-        only when agents are treated as actual agents: entities with structured environments,
-        with internal models of other agents, and with enough representational depth to
-        coordinate rather than merely react.
+    <section class="hero">
+      <div class="eyebrow">Linguistic Agents Ltd</div>
+      <h1>A new architecture for real multi-agent intelligence</h1>
+      <p class="lead">
+        Current multi-agent systems are too often built as message-passing between weakly modeled
+        endpoints. A more serious design begins with structured environments, explicit agent models,
+        and graph-based representation.
       </p>
 
       <div class="actions">
-        <a class="button primary" href="#architecture">Read the architecture</a>
-        <a class="button secondary" href="#contact">Request early access</a>
+        <a class="button primary" href="architecture.html">Read the architecture</a>
+        <a class="button secondary" href="contact.html">Contact</a>
       </div>
     </section>
 
     <section>
-      <div class="cards">
-        <div class="card">
-          <h3>Real agents, not wrappers</h3>
-          <p>
-            Agents are not just prompts with names. They operate in structured environments
-            and track not only the task, but also what other agents know and what they think
-            fellow agents know about the task.
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>Structured environments</h3>
-          <p>
-            Environment = graph structure + small neural networks.
-            Agent = environment + LLM.
-            The top-level model should orchestrate, while narrower learned systems handle
-            internal work.
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>Your cloud or your machine</h3>
-          <p>
-            Deploy under your own control. The runtime is designed for your cloud or your laptop,
-            not for surrendering project knowledge to someone else’s hosted black box.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section id="architecture">
-      <h2>Why this runtime exists</h2>
-
-      <p>
-        We are building a multi-agent graph runtime around a simple architectural distinction.
-        An <strong>environment</strong> is not a loose bag of prompts, tools, and context windows.
-        It has structure. It consists of graph structure plus small neural networks.
-        An <strong>agent</strong> is an environment with an LLM.
-      </p>
-
       <div class="formula">
         <strong>Environment = graph structure + small neural networks</strong><br>
         <strong>Agent = environment + LLM</strong>
       </div>
 
       <p>
-        This matters because many current AI builders multiply agents before defining agency.
-        A system is called multi-agent simply because several large models or chat endpoints
-        are exchanging messages. But real coordination requires more than traffic. It requires
-        representation.
-      </p>
-
-      <p>
-        In a serious multi-agent system, each agent should track not only the task, but what
-        other agents know and what they think fellow agents know about the task. This improves
-        coordination first. It also opens the way to stronger verification later, because
-        explicit structure can be inspected, traced, and checked.
-      </p>
-
-      <div class="quote">
-        Coordination improves when agents model each other, not just message each other.
-      </div>
-
-      <p>
-        Graph structure is central here. A graph makes it possible to represent environments,
-        relations, task states, and agent models in explicit form rather than leaving everything
-        dissolved inside undifferentiated text.
+        This distinction is the basis of the current direction. The top-level language-capable
+        model should not be forced to do everything. The smartest model should orchestrate, while
+        narrower learned systems do narrower work inside structured environments.
       </p>
     </section>
 
     <section>
-      <h2>Layered intelligence, not one giant black box</h2>
+      <h2>What is wrong today</h2>
 
       <p>
-        Our approach is not based on a single model doing everything by itself. Some parts of
-        the system require high-level orchestration. Some require narrow learned behavior.
-        Some require explicit graph structure. Some require representations of other agents and
-        of the environment they share.
+        Many systems called multi-agent are not truly multi-agent in a serious architectural sense.
+        They are collections of endpoints exchanging messages. They may have several prompts,
+        several roles, several model calls, and several tool interfaces, but this alone does not
+        produce real agency.
       </p>
 
       <p>
-        This is why the runtime is not merely an LLM wrapper and not merely an orchestration
-        layer. It is an attempt to build a more serious architecture for agent-based intelligence.
-        The smartest model should orchestrate. Smaller specialized neural systems should do
-        narrower work.
+        Real multi-agent design begins only when agents are modeled as actual agents. An actual
+        agent must carry a structured environment, a representation of the task, and explicit
+        models of other agents. Without this, coordination remains shallow and fragile.
       </p>
 
-      <p>
-        Reinforcement learning is one of the pillars, but not only in the familiar “LLM plus RL”
-        sense. We also treat <strong>RL-trained Graph Neural Networks</strong> as foundational,
-        because structured environments must be learned and optimized as structured environments,
-        not merely described in language.
-      </p>
-
-      <div class="highlight-block">
+      <div class="quote">
         Current AI builders often multiply agents before defining agency.
       </div>
     </section>
 
     <section>
-      <h2>Toward teachable and verifiable competence</h2>
+      <h2>What changes here</h2>
 
       <p>
-        We do not treat Agentic Form as a totally unknown latent that must emerge blindly from
-        opaque training. Important aspects of agentive internal structure are already partly
-        knowable through action, coordination, and advanced semantics.
+        In this architecture, graph structure is not an implementation detail. It is part of the
+        representational substrate itself. It makes it possible to represent entities, relations,
+        task states, environments, and agent models explicitly rather than leaving everything
+        dissolved inside raw text.
       </p>
 
       <p>
-        The result we are aiming for is not just smarter output. It is a system in which
-        competence can be carried, reused, and eventually taught. An agent that carries an
-        environment does not merely execute a capability. It carries structured competence
-        with it.
+        One practical engineering principle is central here: each agent should track not only the
+        task, but what other agents know and what they think fellow agents know about the task.
+        Better coordination is the first gain. Stronger verification is a later and important one.
       </p>
 
-      <div class="quote">
-        You only know what you can teach.
-      </div>
-
       <p>
-        Over time, that same explicit structure may support stronger automatic verification,
-        including workflows where legal and commercial trust matter.
+        Reinforcement learning is also one of the pillars of this direction, including reinforcement
+        learning applied to graph neural networks. If environments are structured, then the systems
+        learning those environments must also be treated as structured learners, not only as text
+        predictors.
       </p>
     </section>
 
     <section>
-      <h2>Why now</h2>
-
-      <p>
-        This product is being built now because earlier generations of models were too weak
-        to help construct it fast enough. They could describe fragments of the vision, but not
-        participate effectively in building the runtime itself. That has changed.
-      </p>
-
-      <p>
-        Current models are finally strong enough to help implement the architecture that goes
-        beyond ordinary prompt-centric workflows. In that sense, today’s strongest models are
-        not the final architecture. They are participants in building the next one.
-      </p>
-    </section>
-
-    <section>
-      <h2>Current direction</h2>
-
-      <div class="pillars">
-        <div class="pillar"><strong>Coordination first</strong><br>Better multi-agent cooperation through explicit agent models.</div>
-        <div class="pillar"><strong>Deployment control</strong><br>Run in your own cloud or on your own machine.</div>
-        <div class="pillar"><strong>Verification next</strong><br>Explicit structure opens the way to inspection and checking.</div>
-        <div class="pillar"><strong>Layered runtime</strong><br>LLMs orchestrate while smaller networks do narrower work.</div>
-      </div>
-
-      <p style="margin-top: 24px;">
-        We are building toward a runtime where real-time streams can become structured
-        environments, where agents can operate over those environments, and where the resulting
-        system is more teachable, more inspectable, and more verifiable than current multi-agent stacks.
-      </p>
-    </section>
-
-    <section>
-      <h2>Read more</h2>
-
-      <p>
-        To understand the broader theoretical direction behind this work, start with:
-      </p>
+      <h2>Read first</h2>
 
       <ul>
+        <li><a href="architecture.html">Architecture</a></li>
         <li>
           <a href="https://medium.com/cognitive-computing-and-linguistic-intelligence/a-layered-architecture-for-symbolic-superintelligence-4054e96190ec">
             A Layered Architecture for Symbolic SuperIntelligence
           </a>
         </li>
-        <li>Agentic Form and the Game Environment</li>
-        <li>JEPA, World Models, and the Case for Agentic Form</li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </section>
 
-    <section id="contact">
-      <h2>Early access</h2>
-
-      <p>
-        If you are an AI builder interested in structured multi-agent systems, graph runtimes,
-        or verification-first AI architecture, get in touch.
-      </p>
-
-      <p>
-        Contact: <a href="mailto:your@email.com">your@email.com</a>
-      </p>
-    </section>
-
-    <div class="footer-note">
-      Built for AI builders who want real multi-agent design, explicit structure, and deployment under their own control.
-    </div>
+    <footer class="site-footer">
+      <p>© 2026 Linguistic Agents Ltd. All rights reserved.</p>
+    </footer>
 
   </div>
 </body>

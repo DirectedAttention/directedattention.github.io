@@ -235,12 +235,16 @@ a:hover {
   font-weight: 700;
 }
 
-.footer-note {
+.site-footer {
   margin-top: 64px;
   padding-top: 24px;
   border-top: 2px solid var(--border);
   color: var(--text-soft);
   font-size: 0.98rem;
+}
+
+.site-footer p {
+  margin: 0;
 }
 
 @media (max-width: 720px) {
