@@ -2,6 +2,7 @@
    General page defaults shared by all static pages.
 */
 
+
 *,
 *::before,
 *::after {
@@ -28,19 +29,15 @@ body {
 img,
 svg,
 video {
+  display: block;
   max-width: 100%;
   height: auto;
-  display: block;
 }
 
 a {
   color: var(--la-link);
   text-decoration: none;
   text-underline-offset: 0.18em;
-  transition:
-    color var(--la-transition-fast),
-    background-color var(--la-transition-fast),
-    border-color var(--la-transition-fast);
 }
 
 a:hover {
@@ -64,10 +61,6 @@ select {
   font: inherit;
 }
 
-button {
-  cursor: pointer;
-}
-
 p {
   margin: 0 0 var(--la-space-4);
 }
@@ -83,14 +76,14 @@ h4,
 h5,
 h6 {
   margin: 0 0 var(--la-space-4);
-  color: var(--la-ink);
+  color: var(--la-heading);
   font-weight: var(--la-weight-bold);
   line-height: var(--la-leading-tight);
-  letter-spacing: -0.025em;
+  letter-spacing: -0.035em;
 }
 
 h1 {
-  font-size: clamp(2.35rem, 6vw, var(--la-text-4xl));
+  font-size: clamp(2.4rem, 6vw, var(--la-text-4xl));
 }
 
 h2 {
@@ -99,10 +92,6 @@ h2 {
 
 h3 {
   font-size: clamp(1.35rem, 3vw, var(--la-text-2xl));
-}
-
-h4 {
-  font-size: var(--la-text-xl);
 }
 
 ul,
@@ -125,26 +114,7 @@ small {
 
 code {
   font-family: var(--la-font-mono);
-  font-size: 0.94em;
-  background: var(--la-blue-wash);
-  border: var(--la-border-width) solid var(--la-border);
-  border-radius: var(--la-radius-sm);
-  padding: 0.08rem 0.28rem;
-}
-
-pre {
-  overflow-x: auto;
-  margin: 0 0 var(--la-space-6);
-  padding: var(--la-space-4);
-  background: var(--la-soft-blue-page);
-  border: var(--la-border-width) solid var(--la-border);
-  border-radius: var(--la-radius-md);
-}
-
-pre code {
-  background: transparent;
-  border: 0;
-  padding: 0;
+  color: var(--la-deep-blue);
 }
 
 hr {
@@ -154,15 +124,13 @@ hr {
 }
 
 ::selection {
-  background: var(--la-blue);
-  color: #ffffff;
+  background: var(--la-soft-cyan);
+  color: var(--la-deep-blue);
 }
 
 .la-page {
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top left, rgba(72, 154, 221, 0.13), transparent 32rem),
-    linear-gradient(180deg, var(--la-page) 0%, var(--la-soft-blue-page) 100%);
+  background: var(--la-page);
 }
 
 .la-wrap {
@@ -188,12 +156,9 @@ hr {
   padding-block: var(--la-space-10);
 }
 
-.la-muted {
-  color: var(--la-text-muted);
-}
-
+.la-muted,
 .la-soft {
-  color: var(--la-text-soft);
+  color: var(--la-text-muted);
 }
 
 @media (max-width: 720px) {
@@ -209,4 +174,3 @@ hr {
     padding-block: var(--la-space-8);
   }
 }
-

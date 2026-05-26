@@ -1,0 +1,160 @@
+/* Linguistic Agents — Simple Calm Homepage
+   No hero block. Almost-white page, white content panels.
+*/
+
+.home-simple {
+  background: var(--la-almost-white);
+  color: var(--la-gray-dark);
+}
+
+.home-intro {
+  padding-block: var(--la-space-8) var(--la-space-6);
+  background: var(--la-almost-white);
+}
+
+.home-main-card {
+  max-width: 920px;
+  padding: var(--la-space-10);
+  border: var(--la-border-width) solid var(--la-gray-light);
+  border-radius: var(--la-radius-xl);
+  background: var(--la-white);
+}
+
+.home-eyebrow-simple {
+  margin-bottom: var(--la-space-4);
+  color: var(--la-gray-mid);
+  font-size: var(--la-text-sm);
+  font-weight: var(--la-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.home-title-simple {
+  max-width: 16ch;
+  margin-bottom: var(--la-space-5);
+  color: var(--la-blue);
+  font-size: clamp(2.3rem, 5vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+
+.home-lede-simple {
+  max-width: 780px;
+  color: var(--la-gray-dark);
+  font-size: clamp(1.05rem, 1.8vw, 1.24rem);
+  line-height: var(--la-leading-relaxed);
+}
+
+.home-lede-simple a {
+  color: var(--la-blue);
+  font-weight: var(--la-weight-bold);
+  text-decoration: underline;
+}
+
+.home-actions-simple {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--la-space-3);
+  margin-top: var(--la-space-6);
+}
+
+.home-section-simple {
+  padding-block: var(--la-space-6);
+  background: var(--la-almost-white);
+}
+
+.home-two-column {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--la-space-5);
+}
+
+.home-three-column {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--la-space-5);
+}
+
+.home-panel-simple,
+.home-small-simple {
+  border: var(--la-border-width) solid var(--la-gray-light);
+  border-radius: var(--la-radius-xl);
+  background: var(--la-white);
+}
+
+.home-panel-simple {
+  padding: var(--la-space-8);
+}
+
+.home-small-simple {
+  padding: var(--la-space-6);
+}
+
+.home-panel-simple h2,
+.home-small-simple h3 {
+  color: var(--la-blue);
+}
+
+.home-panel-simple p,
+.home-small-simple p {
+  color: var(--la-gray-dark);
+  line-height: var(--la-leading-relaxed);
+}
+
+.home-facts-simple {
+  display: grid;
+  gap: var(--la-space-3);
+  margin: var(--la-space-6) 0 0;
+}
+
+.home-facts-simple div {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: var(--la-space-4);
+  padding-top: var(--la-space-3);
+  border-top: var(--la-border-width) solid var(--la-gray-light);
+}
+
+.home-facts-simple dt {
+  color: var(--la-gray-mid);
+  font-size: var(--la-text-xs);
+  font-weight: var(--la-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.home-facts-simple dd {
+  margin: 0;
+  color: var(--la-gray-dark);
+  font-weight: var(--la-weight-semibold);
+}
+
+.home-social-links-simple {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--la-space-3);
+}
+
+.home-social-links-simple a {
+  color: var(--la-blue);
+  font-weight: var(--la-weight-bold);
+}
+
+@media (max-width: 900px) {
+  .home-two-column,
+  .home-three-column {
+    grid-template-columns: 1fr;
+  }
+
+  .home-main-card {
+    padding: var(--la-space-6);
+  }
+}
+
+@media (max-width: 640px) {
+  .home-facts-simple div {
+    grid-template-columns: 1fr;
+    gap: var(--la-space-1);
+  }
+}
+
