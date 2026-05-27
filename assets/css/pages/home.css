@@ -8,7 +8,7 @@
 }
 
 .home-intro {
-  padding-block: var(--la-space-8) var(--la-space-6);
+  padding-block: var(--la-space-4) var(--la-space-6);
   background: var(--la-almost-white);
 }
 
@@ -157,4 +157,6 @@
     gap: var(--la-space-1);
   }
 }
+
+
 
