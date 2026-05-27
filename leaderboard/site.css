@@ -427,18 +427,6 @@ main {
   gap: var(--la-space-2);
 }
 
-.la-topbar-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.35rem;
-  padding: 0 var(--la-space-4);
-  border-radius: var(--la-radius-pill);
-  color: var(--la-gray-mid);
-  font-size: var(--la-text-sm);
-  font-weight: var(--la-weight-bold);
-  text-decoration: none;
-}
-
 .la-topbar-link:hover {
   color: var(--la-blue);
   text-decoration: none;
@@ -448,6 +436,63 @@ main {
   color: var(--la-blue);
   background: var(--la-white);
 }
+
+
+.la-topbar-link {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 0.18rem;
+  min-height: 3.4rem;
+  padding: 0 var(--la-space-3);
+  border-radius: var(--la-radius-md);
+  color: var(--la-gray-mid);
+  font-size: var(--la-text-xs);
+  font-weight: var(--la-weight-bold);
+  text-decoration: none;
+}
+
+.la-nav-icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  border: var(--la-border-width) solid var(--la-gray-light);
+  border-radius: var(--la-radius-sm);
+  background: var(--la-white);
+}
+
+.la-nav-leaderboard .la-nav-icon {
+  border-color: var(--la-blue);
+  background: var(--la-blue);
+}
+
+.la-nav-updates .la-nav-icon {
+  border-color: var(--la-soft-orange);
+  background: var(--la-soft-orange);
+}
+
+.la-nav-symbolic .la-nav-icon {
+  border-color: var(--la-violet);
+  background: var(--la-violet);
+}
+
+.la-nav-company .la-nav-icon {
+  border-color: var(--la-gray-mid);
+  background: var(--la-gray-mid);
+}
+
+.la-topbar-link:hover,
+.la-topbar-link.la-nav-link-active {
+  color: var(--la-blue);
+  text-decoration: none;
+  background: var(--la-white);
+}
+
+.la-topbar-link.la-nav-link-active .la-nav-icon {
+  border-color: var(--la-blue);
+}
+
+
+
 
 /* Buttons */
 
