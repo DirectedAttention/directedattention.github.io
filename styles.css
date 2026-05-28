@@ -1,19 +1,31 @@
 :root {
-  --gray-light: #dddddd;
-  --gray-mid: #999999;
-  --gray-dark: #484848;
-  --almost-white: #f9f9f9;
-  --white: #ffffff;
+  /* Primary gray system */
+  --la-gray-light: #dddddd;
+  --la-gray-mid: #9a9a9a;
+  --la-gray-dark: #484848;
+  --la-almost-white: #f9f9f9;
 
-  --blue: #489add;
-  --soft-red: #dd484f;
-  --raspberry: #dd489a;
-  --soft-orange: #dd8b48;
-  --dynamic-green: #9add48;
-  --soft-cyan: #48ddd6;
-  --violet: #8b48dd;
+  /* Official Soft Blue Palette */
+  --la-blue: #489add;
+  --la-soft-orange: #dd8b48;
+  --la-raspberry: #dd489a;
+  --la-dynamic-green: #9add48;
+  --la-cyan-lime-green: #48dd8b;
+  --la-soft-cyan: #48ddd6;
+  --la-deep-blue: #484fdd;
+  --la-soft-yellow: #ddd648;
+  --la-soft-red: #dd484f;
+  --la-soft-violet: #8c48dd;
+  --la-violet: #8b48dd;
 
-  --page-max: 1180px;
+  /* Additional dark palette color, not default body text */
+  --la-ink: #0f1419;
+
+  /* Neutral */
+  --la-white: #ffffff;
+
+  /* Layout */
+  --la-page-max: 1180px;
 }
 
 *,
@@ -29,8 +41,8 @@ html {
 body {
   margin: 0;
   min-height: 100%;
-  background: var(--almost-white);
-  color: var(--gray-dark);
+  background: var(--la-almost-white);
+  color: var(--la-gray-dark);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Arial, sans-serif;
   font-size: 16px;
@@ -38,7 +50,7 @@ body {
 }
 
 a {
-  color: var(--blue);
+  color: var(--la-blue);
   text-decoration: none;
 }
 
@@ -47,7 +59,7 @@ a:hover {
 }
 
 .wrap {
-  width: min(100% - 2rem, var(--page-max));
+  width: min(100% - 2rem, var(--la-page-max));
   margin-inline: auto;
 }
 
@@ -55,15 +67,15 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: var(--white);
-  border-bottom: 1px solid var(--gray-light);
+  background: var(--la-white);
+  border-bottom: 1px solid var(--la-gray-light);
 }
 
 .brand {
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  color: var(--gray-dark);
+  color: var(--la-gray-dark);
   font-weight: 700;
 }
 
@@ -78,14 +90,14 @@ a:hover {
 }
 
 .brand-name {
-  color: var(--gray-dark);
+  color: var(--la-gray-dark);
   font-size: 1.05rem;
 }
 
 .main-surface,
 .card {
-  background: var(--white);
-  border: 1px solid var(--gray-light);
+  background: var(--la-white);
+  border: 1px solid var(--la-gray-light);
   border-radius: 1.25rem;
 }
 
@@ -103,17 +115,17 @@ h3 {
 
 h1 {
   max-width: 14ch;
-  color: var(--blue);
+  color: var(--la-blue);
   font-size: clamp(2.4rem, 6vw, 4.6rem);
 }
 
 h2 {
-  color: var(--blue);
+  color: var(--la-blue);
   font-size: clamp(1.6rem, 3vw, 2.4rem);
 }
 
 h3 {
-  color: var(--gray-mid);
+  color: var(--la-gray-mid);
   font-size: 0.8rem;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -125,7 +137,7 @@ p {
 }
 
 .lead {
-  color: var(--gray-dark);
+  color: var(--la-gray-dark);
   font-size: clamp(1.08rem, 2vw, 1.28rem);
 }
 
@@ -142,7 +154,7 @@ p {
   justify-content: center;
   min-height: 2.75rem;
   padding: 0 1.25rem;
-  border: 1px solid var(--blue);
+  border: 1px solid var(--la-blue);
   border-radius: 999px;
   font-weight: 700;
 }
@@ -152,13 +164,13 @@ p {
 }
 
 .button.primary {
-  background: var(--blue);
-  color: var(--white);
+  background: var(--la-blue);
+  color: var(--la-white);
 }
 
 .button.secondary {
-  background: var(--white);
-  color: var(--blue);
+  background: var(--la-white);
+  color: var(--la-blue);
 }
 
 .two-column {
@@ -181,8 +193,8 @@ p {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: var(--white);
-  border-bottom: 1px solid var(--gray-light);
+  background: var(--la-white);
+  border-bottom: 1px solid var(--la-gray-light);
 }
 
 .header-inner {
@@ -197,13 +209,13 @@ p {
   display: flex;
   align-items: center;
   gap: 0.9rem;
-  color: var(--gray-dark);
+  color: var(--la-gray-dark);
   font-weight: 700;
   text-decoration: none;
 }
 
 .brand:hover {
-  color: var(--gray-dark);
+  color: var(--la-gray-dark);
   text-decoration: none;
 }
 
@@ -215,7 +227,7 @@ p {
 }
 
 .brand-name {
-  color: var(--gray-dark);
+  color: var(--la-gray-dark);
   font-size: 1.08rem;
   letter-spacing: -0.02em;
 }
@@ -227,14 +239,14 @@ p {
 }
 
 .top-nav a {
-  color: var(--gray-mid);
+  color: var(--la-gray-mid);
   font-size: 0.94rem;
   font-weight: 500;
   text-decoration: none;
 }
 
 .top-nav a:hover {
-  color: var(--blue);
+  color: var(--la-blue);
   text-decoration: none;
 }
 
@@ -244,8 +256,8 @@ p {
 .site-footer {
   margin-top: 3rem;
   padding-block: 2.75rem 1.5rem;
-  background: var(--almost-white);
-  border-top: 1px solid var(--gray-light);
+  background: var(--la-almost-white);
+  border-top: 1px solid var(--la-gray-light);
 }
 
 .footer-inner {
@@ -259,7 +271,7 @@ p {
   display: flex;
   align-items: center;
   gap: 1rem;
-  color: var(--gray-mid);
+  color: var(--la-gray-mid);
   font-weight: 700;
 }
 
@@ -284,7 +296,7 @@ p {
 
 .footer-column h3 {
   margin: 0 0 0.45rem;
-  color: var(--gray-mid);
+  color: var(--la-gray-mid);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.09em;
@@ -292,22 +304,22 @@ p {
 }
 
 .footer-column a {
-  color: var(--gray-dark);
+  color: var(--la-gray-dark);
   font-size: 0.92rem;
   font-weight: 500;
   text-decoration: none;
 }
 
 .footer-column a:hover {
-  color: var(--blue);
+  color: var(--la-blue);
   text-decoration: underline;
 }
 
 .copyright {
   margin-top: 2.25rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--gray-light);
-  color: var(--gray-mid);
+  border-top: 1px solid var(--la-gray-light);
+  color: var(--la-gray-mid);
   font-size: 0.9rem;
 }
 

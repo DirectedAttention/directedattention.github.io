@@ -686,6 +686,10 @@ main {
   border-left-color: var(--la-soft-cyan);
 }
 
+.la-leader-card[data-accent="cyan-lime"] {
+  border-left-color: var(--la-cyan-lime-green);
+}
+
 .la-leader-card[data-accent="raspberry"] {
   border-left-color: var(--la-raspberry);
 }

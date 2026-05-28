@@ -175,7 +175,7 @@ function Test-ExpectedCssPolicy {
         Write-Ok "tokens.css contains #f9f9f9"
     }
 
-    if ($Tokens -notmatch "#dddddd" -or $Tokens -notmatch "#999999" -or $Tokens -notmatch "#484848") {
+    if ($Tokens -notmatch "#dddddd" -or $Tokens -notmatch "#9a9a9a" -or $Tokens -notmatch "#484848") {
         Write-Fail "tokens.css is missing one of the primary gray colors: #dddddd, #999999, #484848"
     }
     else {
