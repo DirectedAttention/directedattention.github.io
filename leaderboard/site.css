@@ -686,6 +686,10 @@ main {
   border-left-color: var(--la-soft-cyan);
 }
 
+.la-leader-card[data-accent="cyan-lime"] {
+  border-left-color: var(--la-cyan-lime-green);
+}
+
 .la-leader-card[data-accent="raspberry"] {
   border-left-color: var(--la-raspberry);
 }
@@ -794,6 +798,11 @@ main {
 .la-badge[data-accent="cyan"] {
   border-color: var(--la-soft-cyan);
   color: var(--la-soft-cyan);
+}
+
+.la-badge[data-accent="cyan-lime"] {
+  border-color: var(--la-cyan-lime-green);
+  color: var(--la-cyan-lime-green);
 }
 
 .la-badge[data-accent="deep-blue"] {
