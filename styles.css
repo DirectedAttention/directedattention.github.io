@@ -89,10 +89,28 @@ a:hover {
   object-fit: contain;
 }
 
-.brand-name {
-  color: var(--la-gray-dark);
-  font-size: 1.05rem;
+
+.brand-program {
+  display: grid;
+  gap: 0.08rem;
 }
+
+.brand-program-main {
+  color: var(--la-raspberry);
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+.brand-program-sub {
+  color: var(--la-blue);
+  font-size: 0.96rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
+
 
 .main-surface,
 .card {
@@ -349,4 +367,17 @@ p {
   }
 }
 
+
+.hero-title-blue,
+.hero-title-gray {
+  display: block;
+}
+
+.hero-title-blue {
+  color: var(--la-blue);
+}
+
+.hero-title-gray {
+  color: var(--la-gray-dark);
+}
 
