@@ -461,11 +461,11 @@ main {
 }
 
 .la-nav-sapient {
-  color: var(--la-soft-cyan);
+  color: var(--la-cyan-lime-green);
 }
 
 .la-nav-sapient .la-nav-square {
-  background: var(--la-soft-cyan);
+  background: var(--la-cyan-lime-green);
 }
 
 @media (max-width: 900px) {
@@ -684,10 +684,6 @@ main {
 
 .la-leader-card[data-accent="cyan"] {
   border-left-color: var(--la-soft-cyan);
-}
-
-.la-leader-card[data-accent="cyan-lime"] {
-  border-left-color: var(--la-cyan-lime-green);
 }
 
 .la-leader-card[data-accent="raspberry"] {
