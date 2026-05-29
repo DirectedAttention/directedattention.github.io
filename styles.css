@@ -421,7 +421,7 @@ p {
 .section-heading {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.8rem;
   margin: 0 0 1rem;
 
   color: var(--la-blue);
@@ -434,12 +434,12 @@ p {
 
 .section-heading::before {
   content: "";
-  width: 0.58rem;
-  height: 0.58rem;
+  width: 1rem;
+  height: 1rem;
   flex: 0 0 auto;
 
   background: var(--la-soft-cyan);
-  border-radius: 0.08rem;
+  border-radius: 0.1rem;
 }
 
 .intro-section {
@@ -449,3 +449,187 @@ p {
 .content-section {
   padding-top: 1.5rem;
 }
+
+
+/* Homepage sections */
+
+.intro-section {
+  padding-top: clamp(2rem, 5vw, 4rem);
+}
+
+.content-section {
+  padding-top: 1.5rem;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0 0 1rem;
+
+  color: var(--la-blue);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  text-transform: none;
+}
+
+.section-heading::before {
+  content: "";
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+
+  background: var(--la-soft-cyan);
+  border-radius: 0.1rem;
+}
+
+/* Linguistic term badges */
+
+.ling-term {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.12rem 0.42rem;
+  background: var(--la-almost-white);
+  border: 1px solid var(--la-gray-light);
+  border-radius: 0.35rem;
+  color: var(--la-gray-dark);
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: help;
+}
+
+.ling-tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.45rem);
+  transform: translateX(-50%);
+  z-index: 30;
+
+  width: max-content;
+  max-width: 280px;
+  padding: 0.55rem 0.7rem;
+
+  background: var(--la-ink);
+  color: var(--la-white);
+  border-radius: 0.45rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.35;
+  text-align: left;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 140ms ease;
+}
+
+.ling-term:hover .ling-tooltip,
+.ling-term:focus .ling-tooltip,
+.ling-term:focus-within .ling-tooltip {
+  opacity: 1;
+}
+
+/* Compact 3-row pipeline */
+
+.pipeline-compact {
+  margin-top: 1.25rem;
+  padding: 1rem;
+  background: var(--la-white);
+  border: 1px solid var(--la-gray-light);
+  border-radius: 1rem;
+}
+
+.pipeline-agent {
+  color: var(--la-blue);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.pipeline-agent-right {
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+  text-align: right;
+}
+
+.pipeline-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.pipeline-arrow {
+  color: var(--la-gray-mid);
+  font-weight: 700;
+}
+
+.speech-line {
+  display: flex;
+  justify-content: center;
+  margin: 0.9rem 0;
+}
+
+.speech-line span,
+.pipeline-speech {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.18rem 0.65rem;
+  border-radius: 999px;
+  background: var(--la-soft-cyan);
+  color: var(--la-gray-dark);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Expanded vertical pipeline */
+
+.pipeline-stack {
+  display: grid;
+  gap: 0.55rem;
+  max-width: 520px;
+  margin-top: 1.25rem;
+}
+
+.pipeline-person {
+  color: var(--la-blue);
+  font-weight: 700;
+}
+
+.pipeline-stage {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--la-gray-dark);
+}
+
+.pipeline-stage::before {
+  content: "↓";
+  color: var(--la-gray-mid);
+  font-weight: 700;
+  width: 1rem;
+}
+
+.pipeline-person:first-child::before {
+  content: "";
+}
+
+.pipeline-speech {
+  justify-self: start;
+  margin-left: 1rem;
+}
+
+@media (max-width: 760px) {
+  .ling-tooltip {
+    left: 0;
+    transform: none;
+    max-width: min(260px, 80vw);
+  }
+
+  .pipeline-stage {
+    flex-wrap: wrap;
+  }
+}
+
