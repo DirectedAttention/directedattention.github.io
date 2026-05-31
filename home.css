@@ -1,0 +1,179 @@
+/* card width */
+
+/* Homepage: left content column */
+
+.intro-section .wrap.main-surface,
+.content-section .wrap.main-surface {
+  width: min(100% - 2rem, 780px);
+  margin-left: max(1rem, calc((100% - var(--la-page-max)) / 2));
+  margin-right: auto;
+}
+
+/* opening statement */
+
+.intro-title {
+  max-width: 18ch;
+  margin: 0 0 1rem;
+  color: var(--la-soft-orange);
+  font-size: clamp(2rem, 4.6vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+}
+
+/* technical term badges */
+
+.ling-term {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.12rem 0.42rem;
+  background: var(--la-almost-white);
+  border: 1px solid var(--la-gray-light);
+  border-radius: 0.35rem;
+  color: var(--la-gray-dark);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* compact architecture line */
+
+.architecture-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1.25rem;
+  padding: 1rem;
+  background: var(--la-white);
+  border: 1px solid var(--la-gray-light);
+  border-radius: 1rem;
+}
+
+.architecture-format {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.12rem 0.5rem;
+  color: var(--la-gray-dark);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.architecture-arrow {
+  color: var(--la-gray-mid);
+  font-weight: 700;
+}
+
+/* expanded Alice-to-Bob pipeline */
+
+.pipeline-stack {
+  display: grid;
+  gap: 0.55rem;
+  max-width: 620px;
+  margin-top: 1.25rem;
+}
+
+.pipeline-person {
+  color: var(--la-blue);
+  font-weight: 700;
+}
+
+.pipeline-format {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--la-gray-dark);
+  font-weight: 600;
+}
+
+.pipeline-engine {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.pipeline-format::before,
+.pipeline-engine::before,
+.pipeline-speech::before {
+  content: "↓";
+  color: var(--la-gray-mid);
+  font-weight: 700;
+  width: 1rem;
+  flex: 0 0 auto;
+}
+
+.pipeline-speech {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.pipeline-speech span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.18rem 0.65rem;
+  border-radius: 999px;
+  background: var(--la-soft-cyan);
+  color: var(--la-gray-dark);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Agentic Form Feature Lists */
+
+.other-half-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.other-half-list li {
+  position: relative;
+  padding-left: 1.15rem;
+  max-width: 780px;
+}
+
+.other-half-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.42rem;
+  height: 0.42rem;
+  background: var(--la-soft-orange);
+  border-radius: 0.06rem;
+}
+
+/* small note blocks */
+
+.home-note {
+  max-width: 780px;
+  margin-top: 1rem;
+  color: var(--la-gray-mid);
+  font-size: 0.95rem;
+}
+
+/* Mobile */
+
+@media (max-width: 760px) {
+  .ling-tooltip {
+    left: 0;
+    transform: none;
+    max-width: min(260px, 80vw);
+  }
+
+  .pipeline-format,
+  .pipeline-engine,
+  .pipeline-speech {
+    flex-wrap: wrap;
+  }
+
+  .architecture-line {
+    align-items: flex-start;
+  }
+}
+
+
+
