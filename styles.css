@@ -220,7 +220,7 @@ p {
 
   color: var(--la-blue);
   font-size: clamp(1.05rem, 2vw, 1.25rem);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.015em;
   text-transform: none;
