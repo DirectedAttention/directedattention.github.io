@@ -176,4 +176,15 @@
 }
 
 
+/* Syntax page */
+
+.syntax-title {
+  max-width: 24ch;
+  margin: 0 0 1rem;
+  color: var(--la-soft-orange);
+  font-size: clamp(1.65rem, 3vw, 2.45rem);
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -0.035em;
+}
 

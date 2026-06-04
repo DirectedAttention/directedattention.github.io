@@ -133,6 +133,13 @@ a:hover {
   text-decoration: none;
 }
 
+/* Current page in top navigation */
+
+.top-nav a[aria-current="page"] {
+  color: #ffffff;
+  font-weight: 700;
+}
+
 /* Main surfaces */
 
 main {
@@ -376,4 +383,6 @@ p {
   color: var(--la-gray-dark);
   font-weight: 800;
 }
+
+
 
