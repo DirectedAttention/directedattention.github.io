@@ -301,8 +301,8 @@ p {
 }
 
 .footer-logo {
-  width: 120px;
-  height: 120lpx;
+  width: 96px;
+  height: 96lpx;
   object-fit: contain;
   flex: 0 0 auto;
 }

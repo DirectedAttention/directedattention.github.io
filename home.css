@@ -13,10 +13,11 @@
 
 .intro-title {
   max-width: 18ch;
-  margin: 0 0 1rem;
+  margin: 0 0 0;
   color: var(--la-soft-orange);
-  font-size: clamp(1.8rem, 4vw, 3.25rem);  
-  font-weight: 500;
+  font-size: clamp(1.25rem, 3vw, 2.25rem);
+
+  font-weight: 600;
   line-height: 1.12;
   letter-spacing: -0.04em;
 }
