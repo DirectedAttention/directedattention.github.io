@@ -101,8 +101,8 @@ a:hover {
 }
 
 .brand-logo {
-  width: 58px;
-  height: 58px;
+  width: 290px;
+  height: auto;
   object-fit: contain;
   flex: 0 0 auto;
 }
@@ -301,14 +301,14 @@ p {
 }
 
 .footer-logo {
-  width: 58px;
-  height: 58px;
+  width: 120px;
+  height: 120lpx;
   object-fit: contain;
   flex: 0 0 auto;
 }
 
 .footer-logo-wide {
-  width: 400px;
+  width: 360px;
   height: auto;
   object-fit: contain;
   display: block;
