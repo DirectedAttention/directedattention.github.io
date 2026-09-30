@@ -1,12 +1,11 @@
 "use strict";
 
-// Ordered from highest to lowest priority.
-// More Agentic Form files can be added here later.
-const agenticFormFileNames = [
-    "digraph.txt"
+// Local files that SYSTEM knows how to read from an Agentic Form folder.
+// The list will grow slowly as the format grows.
+const localFileNames = [
+    "digraph.txt",
+    "api.txt"
 ];
-
-const providerFileName = "api.txt";
 
 // These hosts are always accepted.
 // Additional approved hosts are read from whitelist.txt.
@@ -41,6 +40,7 @@ ruleBaseUrlInput.addEventListener("input", function () {
     if (urlText.length === 0) {
         loadSequence++;
         topLevelSymbol = null;
+        provider = null;
         ruleBaseStatus.textContent = "";
         return;
     }
@@ -64,6 +64,7 @@ ruleBaseUrlInput.addEventListener("keydown", function (event) {
     if (urlText.length === 0) {
         loadSequence++;
         topLevelSymbol = null;
+        provider = null;
         ruleBaseStatus.textContent = "";
         return;
     }
@@ -84,8 +85,10 @@ processButton.addEventListener("click", function () {
 
 async function inspectAgenticFormUrl(urlText) {
     const requestNumber = ++loadSequence;
+
     topLevelSymbol = null;
     provider = null;
+    setAgentConnected(false);
 
     let folderUrl = null;
 
@@ -116,97 +119,66 @@ async function inspectAgenticFormUrl(urlText) {
         folderUrl.pathname += "/";
     }
 
-    const reports = [];
-    let foundAnyListedFile = false;
-    let foundAnyRule = false;
-    let selectedTopLevelSymbol = null;
-
-    try {
-        for (const fileName of agenticFormFileNames) {
-            const fileUrl = new URL(fileName, folderUrl);
-            const response = await fetch(fileUrl.href, { cache: "no-store" });
-
-            if (requestNumber !== loadSequence) {
-                return;
-            }
-
-            if (response.status === 404) {
-                continue;
-            }
-
-            if (!response.ok) {
-                showNotInSystem(requestNumber);
-                return;
-            }
-
-            foundAnyListedFile = true;
-
-            const fileText = await response.text();
-
-            if (requestNumber !== loadSequence) {
-                return;
-            }
-
-            const normalizedText =
-                fileText.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
-
-            const firstRuleLine = findFirstRuleLine(normalizedText);
-
-            if (firstRuleLine === null) {
-                continue;
-            }
-
-            foundAnyRule = true;
-
-            if (!isValidRuleLine(firstRuleLine)) {
-                showFormatIssues(requestNumber);
-                return;
-            }
-
-            if (selectedTopLevelSymbol === null) {
-                selectedTopLevelSymbol = getRuleLeftSide(firstRuleLine);
-            }
-
-            const lineCount = countLines(normalizedText);
-
-            if (lineCount < 100) {
-                reports.push(fileName + ": " + lineCount.toString() + " lines");
-            } else {
-                reports.push(fileName + ": 100+ lines");
-            }
-        }
-    } catch {
-        showNotInSystem(requestNumber);
-        return;
-    }
-
-    if (requestNumber !== loadSequence) {
-        return;
-    }
-
-    if (!foundAnyListedFile || !foundAnyRule || selectedTopLevelSymbol === null) {
-        showNotInSystem(requestNumber);
-        return;
-    }
-
-    topLevelSymbol = selectedTopLevelSymbol;
-
-    const providerResult = await readProvider(
+    const loadedFiles = await readLocalFiles(
         folderUrl,
-        allowedHosts,
         requestNumber);
 
+    if (loadedFiles === null) {
+        return;
+    }
+
     if (requestNumber !== loadSequence) {
         return;
     }
 
-    if (providerResult.formatIssue) {
+    const digraphText = loadedFiles.get("digraph.txt");
+
+    if (digraphText === undefined) {
+        showNotInSystem(requestNumber);
+        return;
+    }
+
+    const digraphResult = inspectDigraphFile(digraphText);
+
+    if (digraphResult.formatIssue) {
         showFormatIssues(requestNumber);
         return;
     }
 
-    provider = providerResult.provider;
+    if (digraphResult.topLevelSymbol === null) {
+        showNotInSystem(requestNumber);
+        return;
+    }
+
+    topLevelSymbol = digraphResult.topLevelSymbol;
+
+    const apiText = loadedFiles.get("api.txt");
+
+    if (apiText !== undefined) {
+        const providerResult = inspectProviderFile(
+            apiText,
+            allowedHosts);
+
+        if (providerResult.formatIssue) {
+            showFormatIssues(requestNumber);
+            return;
+        }
+
+        provider = providerResult.provider;
+    }
+
     setAgentConnected(true);
+
+    const reports = [];
+
+    if (digraphResult.lineCount < 100) {
+        reports.push(
+            "digraph.txt: " +
+            digraphResult.lineCount.toString() +
+            " lines");
+    } else {
+        reports.push("digraph.txt: 100+ lines");
+    }
 
     reports.push("Top level: " + topLevelSymbol);
 
@@ -218,46 +190,75 @@ async function inspectAgenticFormUrl(urlText) {
     ruleBaseStatus.textContent = reports.join("\n");
 }
 
-async function readProvider(folderUrl, allowedHosts, requestNumber) {
-    const apiFileUrl = new URL(providerFileName, folderUrl);
-
-    let response = null;
+async function readLocalFiles(folderUrl, requestNumber) {
+    const loadedFiles = new Map();
 
     try {
-        response = await fetch(apiFileUrl.href, { cache: "no-store" });
+        for (const fileName of localFileNames) {
+            const fileUrl = new URL(fileName, folderUrl);
+            const response = await fetch(
+                fileUrl.href,
+                { cache: "no-store" });
+
+            if (requestNumber !== loadSequence) {
+                return null;
+            }
+
+            if (response.status === 404) {
+                continue;
+            }
+
+            if (!response.ok) {
+                showNotInSystem(requestNumber);
+                return null;
+            }
+
+            const text = await response.text();
+
+            if (requestNumber !== loadSequence) {
+                return null;
+            }
+
+            loadedFiles.set(
+                fileName,
+                normalizeLines(text));
+        }
     } catch {
+        showNotInSystem(requestNumber);
+        return null;
+    }
+
+    return loadedFiles;
+}
+
+function inspectDigraphFile(text) {
+    const firstRuleLine = findFirstRuleLine(text);
+
+    if (firstRuleLine === null) {
         return {
-            provider: null,
+            topLevelSymbol: null,
+            lineCount: countLines(text),
             formatIssue: false
         };
     }
 
-    if (requestNumber !== loadSequence) {
+    if (!isValidRuleLine(firstRuleLine)) {
         return {
-            provider: null,
-            formatIssue: false
+            topLevelSymbol: null,
+            lineCount: countLines(text),
+            formatIssue: true
         };
     }
 
-    if (response.status === 404) {
-        return {
-            provider: null,
-            formatIssue: false
-        };
-    }
+    return {
+        topLevelSymbol: getRuleLeftSide(firstRuleLine),
+        lineCount: countLines(text),
+        formatIssue: false
+    };
+}
 
-    if (!response.ok) {
-        return {
-            provider: null,
-            formatIssue: false
-        };
-    }
-
-    const text = await response.text();
-    const lines = text
-        .replace(/\r\n/g, "\n")
-        .replace(/\r/g, "\n")
-        .split("\n");
+function inspectProviderFile(text, allowedHosts) {
+    const lines = text.split("\n");
 
     if (lines.length === 0 || lines[0].trim().length === 0) {
         return {
@@ -307,14 +308,18 @@ function parseProviderUrl(text) {
     try {
         const directUrl = new URL(text);
 
-        if (directUrl.protocol !== "http:" && directUrl.protocol !== "https:") {
+        if (directUrl.protocol !== "http:" &&
+            directUrl.protocol !== "https:") {
             return null;
         }
 
         return directUrl;
     } catch {
         try {
-            return new URL("https://" + text);
+            const implicitHttpsUrl =
+                new URL("https://" + text);
+
+            return implicitHttpsUrl;
         } catch {
             return null;
         }
@@ -329,7 +334,9 @@ async function callProvider(values) {
     const requestUrl = new URL(provider.url);
 
     for (const variableName of provider.variables) {
-        if (!Object.prototype.hasOwnProperty.call(values, variableName)) {
+        if (!Object.prototype.hasOwnProperty.call(
+            values,
+            variableName)) {
             continue;
         }
 
@@ -345,29 +352,34 @@ async function callProvider(values) {
 }
 
 async function getAllowedHosts() {
-    const allowedHosts = new Set(hardcodedAllowedHosts);
+    const allowedHosts =
+        new Set(hardcodedAllowedHosts);
 
     try {
-        const response = await fetch("/apps/rulebase-demo/whitelist.txt", { cache: "no-store" });
+        const response = await fetch(
+            "/apps/rulebase-demo/whitelist.txt",
+            { cache: "no-store" });
 
         if (!response.ok) {
             return allowedHosts;
         }
 
         const text = await response.text();
-        const lines = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n").split("\n");
+        const lines = normalizeLines(text).split("\n");
 
         for (const line of lines) {
             const host = line.trim().toLowerCase();
 
-            if (host.length === 0 || host.startsWith("#")) {
+            if (host.length === 0 ||
+                host.startsWith("#")) {
                 continue;
             }
 
             allowedHosts.add(host);
         }
     } catch {
-        // The hardcoded list remains usable even if whitelist.txt cannot be read.
+        // The hardcoded list remains usable even if
+        // whitelist.txt cannot be read.
     }
 
     return allowedHosts;
@@ -396,15 +408,27 @@ function isValidRuleLine(line) {
         return false;
     }
 
-    const left = line.substring(0, separatorIndex).trim();
-    const right = line.substring(separatorIndex + 2).trim();
+    const left =
+        line.substring(0, separatorIndex).trim();
+
+    const right =
+        line.substring(separatorIndex + 2).trim();
 
     return left.length > 0 && right.length > 0;
 }
 
 function getRuleLeftSide(line) {
     const separatorIndex = line.indexOf("=>");
-    return line.substring(0, separatorIndex).trim();
+
+    return line
+        .substring(0, separatorIndex)
+        .trim();
+}
+
+function normalizeLines(text) {
+    return text
+        .replace(/\r\n/g, "\n")
+        .replace(/\r/g, "\n");
 }
 
 function countLines(text) {
@@ -427,9 +451,11 @@ function setAgentConnected(isConnected) {
     processButton.disabled = !isConnected;
 
     if (isConnected) {
-        sentenceInput.placeholder = "Type a sentence here.";
+        sentenceInput.placeholder =
+            "Type a sentence here.";
     } else {
-        sentenceInput.placeholder = "Connect an Agentic Form first.";
+        sentenceInput.placeholder =
+            "Connect an Agentic Form first.";
     }
 }
 
