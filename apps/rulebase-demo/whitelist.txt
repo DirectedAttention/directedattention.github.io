@@ -1,0 +1,4 @@
+# Approved Agentic Form hosts.
+# One exact hostname per line.
+# Example:
+# data.example.com
