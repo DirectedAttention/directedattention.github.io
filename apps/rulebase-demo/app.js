@@ -190,7 +190,7 @@ async function getAllowedHosts() {
     const allowedHosts = new Set(hardcodedAllowedHosts);
 
     try {
-        const response = await fetch("whitelist.txt", { cache: "no-store" });
+        const response = await fetch("/apps/rulebase-demo/whitelist.txt", { cache: "no-store" });
 
         if (!response.ok) {
             return allowedHosts;
