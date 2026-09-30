@@ -16,12 +16,10 @@
                 <input
                     id="ruleBaseUrl"
                     type="url"
-                    placeholder="https://example.com/rulebase">
+                    placeholder="https://example.com/rulebase/">
             </div>
 
-            <button id="loadRuleBaseButton" type="button">Load RuleBase</button>
-
-            <div id="ruleBaseStatus" class="status">No RuleBase loaded.</div>
+            <div id="ruleBaseStatus" class="status" aria-live="polite"></div>
 
             <div class="field sentence-field">
                 <label for="sentenceInput">Sentence</label>
