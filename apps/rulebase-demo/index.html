@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Linguistic Agents RuleBase</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="page">
+        <section class="card">
+            <h1>RuleBase</h1>
+
+            <div class="field">
+                <label for="ruleBaseUrl">RuleBase URL</label>
+                <input
+                    id="ruleBaseUrl"
+                    type="url"
+                    placeholder="https://example.com/rulebase">
+            </div>
+
+            <button id="loadRuleBaseButton" type="button">Load RuleBase</button>
+
+            <div id="ruleBaseStatus" class="status">No RuleBase loaded.</div>
+
+            <div class="field sentence-field">
+                <label for="sentenceInput">Sentence</label>
+                <textarea
+                    id="sentenceInput"
+                    rows="5"
+                    placeholder="Type a sentence here."></textarea>
+            </div>
+
+            <button id="processButton" type="button">Process Sentence</button>
+
+            <pre id="output" class="output">No sentence processed.</pre>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
