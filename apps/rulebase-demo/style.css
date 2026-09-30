@@ -85,3 +85,14 @@ button:hover {
     color: #eee;
     white-space: pre-wrap;
 }
+
+input:disabled,
+textarea:disabled,
+button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+button:disabled:hover {
+    background: #1f5f9f;
+}
