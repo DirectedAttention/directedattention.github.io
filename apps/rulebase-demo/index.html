@@ -1,40 +1,298 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Linguistic Agents — Agentic Form</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Linguistic Agents</title>
+  <meta
+    name="description"
+    content="Linguistic Agents advances a unique approach to AI called Symbolic Superintelligence."
+  >
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/home.css">
 </head>
+
 <body>
-    <main class="page">
-        <section class="card">
-            <h1>Agentic Form</h1>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/index.html">
+        <img
+          class="brand-logo"
+          src="/images/footer-logo.jpg"
+          alt="LA LOGO"
+        >
+      </a>
 
-            <div class="field">
-                <label for="ruleBaseUrl">Agentic Form URL</label>
-                <input
-                    id="ruleBaseUrl"
-                    type="url"
-                    placeholder="https://data.example.com/concept/">
-            </div>
+      <nav class="top-nav" aria-label="Main navigation">
+        <a href="/index.html" aria-current="page">Home</a>
+        <a href="/syntax-all-the-way-down.html">Syntax</a>        
+        <a href="/leaderboard/">SI Leaderboard</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-            <div id="ruleBaseStatus" class="status" aria-live="polite"></div>
+  <main>
+    <section id="Section1" class="intro-section">
+      <div class="wrap main-surface">
+        <h1 class="intro-title">
+            Language Faculty Architecture for AI
+        </h1>
+    <!--
+        <p class="lead">
+        </p>
+    -->
+      </div>
+    </section>
+    
+    <section id="Section2" class="content-section">
+      <div class="wrap main-surface">
+        <h3 class="section-heading">
+          The tripartite Faculty of Language
+        </h3>
 
-            <div class="field sentence-field">
-                <label for="sentenceInput">Sentence</label>
-                <textarea
-                    id="sentenceInput"
-                    rows="5"
-                    placeholder="Type a sentence here."></textarea>
-            </div>
+        <p>
+          Linguists naturally see Syntax as the starting point:
+          <span class="ling-term">C-I</span>
+          <span class="architecture-arrow">←</span>
+          <span class="ling-term">Narrow Syntax</span>
+          <span class="architecture-arrow">→</span>
+          <span class="ling-term">A-P</span>.
+        </p>
 
-            <button id="processButton" type="button">Process Sentence</button>
+        <p>
+          But in AI, the direction of <strong>generation</strong> is:
+        </p>
 
-            <pre id="output" class="output">No sentence processed.</pre>
-        </section>
-    </main>
+        <div class="architecture-line" aria-label="Generation direction">
+          <span class="architecture-format">Agent</span>
+          <span class="architecture-arrow">→</span>
+          <span class="ling-term">C-I</span>
+          <span class="architecture-arrow">→</span>
+          <span class="ling-term">Narrow Syntax</span>
+          <span class="architecture-arrow">→</span>
+          <span class="ling-term">A-P</span>
+          <span class="architecture-arrow">→</span>
+          <span class="architecture-format">speech/text</span>
+        </div>
 
-    <script src="app.js"></script>
+        <p>
+          And the direction of <strong>comprehension</strong> is the other way around:
+        </p>
+
+        <div class="architecture-line" aria-label="Comprehension direction">
+          <span class="architecture-format">speech/text</span>
+          <span class="architecture-arrow">→</span>
+          <span class="ling-term">A-P</span>
+          <span class="architecture-arrow">→</span>
+          <span class="ling-term">Narrow Syntax</span>
+          <span class="architecture-arrow">→</span>
+          <span class="ling-term">C-I</span>
+          <span class="architecture-arrow">→</span>
+          <span class="architecture-format">Agent</span>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="Section3" class="content-section">
+      <div class="wrap main-surface">
+        <h3 class="section-heading">
+          The three engines implement Narrow Syntax
+        </h3>
+
+        <p>
+          In the Linguistic Agents architecture, Narrow Syntax is implemented by three
+          syntactic engines: Inner Syntax, A-bar Syntax, and Distributed Morphology
+          (DM).
+        </p>
+
+        <p>
+          Together with C-I and A-P, these form five engines working in two directions:
+          generation and comprehension.
+        </p>
+
+        <div class="architecture-line" aria-label="Five engines">
+          <span class="ling-term">C-I</span>
+          <span class="architecture-arrow">↔</span>
+          <span class="ling-term">Inner Syntax</span>
+          <span class="architecture-arrow">↔</span>
+          <span class="ling-term">A-bar Syntax</span>
+          <span class="architecture-arrow">↔</span>
+          <span class="ling-term">Distributed Morphology (DM)</span>
+          <span class="architecture-arrow">↔</span>
+          <span class="ling-term">A-P</span>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="Section4"  class="content-section">
+      <div class="wrap main-surface">
+        <h3 class="section-heading">
+          The full path from agent to agent
+        </h3>
+
+        <p>
+          A full communication path goes from one agent to another through ten engine
+          uses: five in generation, and five in comprehension.
+        </p>
+
+        <p>
+          The bracketed names are formats. The almost-white names are engines.
+          speech/text is the external format that can be sent.
+        </p>
+
+        <div class="pipeline-stack" aria-label="Full agent to agent pipeline">
+          <div class="pipeline-person">Alice</div>
+
+          <div class="pipeline-format">[Agentic Form]</div>
+
+          <div class="pipeline-engine">
+            <span class="ling-term">C-I</span>
+          </div>
+
+          <div class="pipeline-format">[Logical Form]</div>
+
+          <div class="pipeline-engine">
+            <span class="ling-term">Inner Syntax</span>
+          </div>
+
+          <div class="pipeline-format">[NP Structure]</div>
+
+          <div class="pipeline-engine">
+            <span class="ling-term">A-bar Syntax</span>
+          </div>
+
+          <div class="pipeline-format">[Syntactic Structure]</div>
+
+          <div class="pipeline-engine">
+            <span class="ling-term">Distributed Morphology (DM)</span>
+          </div>
+
+          <div class="pipeline-format">[Phonological Form]</div>
+
+          <div class="pipeline-engine">
+            <span class="ling-term">A-P</span>
+          </div>
+
+          <div class="pipeline-speech">
+            <span>speech/text</span>
+          </div>
+
+          <div class="pipeline-engine">
+            <span class="ling-term">A-P</span>
+          </div>
+
+          <div class="pipeline-format">[Phonological Form]</div>
+
+          <div class="pipeline-engine">
+            <span class="ling-term">Distributed Morphology (DM)</span>
+          </div>
+
+          <div class="pipeline-format">[Syntactic Structure]</div>
+
+          <div class="pipeline-engine">
+            <span class="ling-term">A-bar Syntax</span>
+          </div>
+
+          <div class="pipeline-format">[NP Structure]</div>
+
+          <div class="pipeline-engine">
+            <span class="ling-term">Inner Syntax</span>
+          </div>
+
+          <div class="pipeline-format">[Logical Form]</div>
+
+          <div class="pipeline-engine">
+            <span class="ling-term">C-I</span>
+          </div>
+
+          <div class="pipeline-format">[Agentic Form]</div>
+
+          <div class="pipeline-person">Bob</div>
+        </div>
+
+        <p>
+          This is the central communication path in Symbolic SI. The agent does not
+          communicate by sending Agentic Form directly. Agentic Form is encoded
+          through the engines into speech/text, and another agent uses the
+          corresponding engines to recover Agentic Form on the receiving side.
+        </p>
+      </div>
+    </section>
+
+    <section id="Section5" class="content-section">
+      <div class="wrap main-surface">
+        <h3 class="section-heading">
+          Symbolic SI is not just a grammar pipeline
+        </h3>
+
+        <p>
+          In Symbolic SI, agents use Agentic Form in all their work with other
+          Cognitive Faculties.
+        </p>
+
+        <p>
+          The Five Engines handle the Faculty of Language. In comprehension, they
+          deliver Agentic Form to the agent. In generation, the agent gives Agentic
+          Form back to the Faculty of Language, where it is encoded as speech/text.
+        </p>
+
+        <p>
+          Some of these areas are also studied by linguists, especially where language,
+          discourse, assumptions, and interpretation meet.
+        </p>
+
+        <ul class="other-half-list">
+          <li>discourse management</li>
+          <li>shared assumptions</li>
+          <li>background knowledge</li>
+          <li>presuppositions</li>
+          <li>implicatures</li>
+          <li>search</li>
+          <li>memory</li>
+          <li>planning</li>
+        </ul>
+
+        <br />
+        <p>
+          Some of these areas are also studied by linguists, especially where language,
+          discourse, assumptions, and interpretation meet.
+        </p>
+      </div>
+
+    </section>  
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand footer-brand-lockup">
+        <img
+          class="footer-logo"
+          src="/images/header-logo.jpg"
+          alt="Linguistic Agents logo"
+        >
+
+      </div>
+
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h3>Research</h3>
+          <a href="/leaderboard/">SI Leaderboard</a>
+        </div>
+
+        <div class="footer-column">
+          <h3>Contact us</h3>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap copyright">
+      © Linguistic Agents Ltd.
+    </div>
+  </footer>
 </body>
 </html>
+
