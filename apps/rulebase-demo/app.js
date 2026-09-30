@@ -6,6 +6,8 @@ const agenticFormFileNames = [
     "digraph.txt"
 ];
 
+const providerFileName = "api.txt";
+
 // These hosts are always accepted.
 // Additional approved hosts are read from whitelist.txt.
 const hardcodedAllowedHosts = new Set([
@@ -26,6 +28,7 @@ let loadTimer = null;
 let loadSequence = 0;
 let topLevelSymbol = null;
 let agentConnected = false;
+let provider = null;
 
 setAgentConnected(false);
 
@@ -82,6 +85,7 @@ processButton.addEventListener("click", function () {
 async function inspectAgenticFormUrl(urlText) {
     const requestNumber = ++loadSequence;
     topLevelSymbol = null;
+    provider = null;
 
     let folderUrl = null;
 
@@ -186,10 +190,158 @@ async function inspectAgenticFormUrl(urlText) {
     }
 
     topLevelSymbol = selectedTopLevelSymbol;
+
+    const providerResult = await readProvider(
+        folderUrl,
+        allowedHosts,
+        requestNumber);
+
+    if (requestNumber !== loadSequence) {
+        return;
+    }
+
+    if (providerResult.formatIssue) {
+        showFormatIssues(requestNumber);
+        return;
+    }
+
+    provider = providerResult.provider;
     setAgentConnected(true);
 
     reports.push("Top level: " + topLevelSymbol);
+
+    if (provider !== null) {
+        reports.push("Provider: " + provider.url);
+        reports.push("Variables: " + provider.variables.join(", "));
+    }
+
     ruleBaseStatus.textContent = reports.join("\n");
+}
+
+async function readProvider(folderUrl, allowedHosts, requestNumber) {
+    const apiFileUrl = new URL(providerFileName, folderUrl);
+
+    let response = null;
+
+    try {
+        response = await fetch(apiFileUrl.href, { cache: "no-store" });
+    } catch {
+        return {
+            provider: null,
+            formatIssue: false
+        };
+    }
+
+    if (requestNumber !== loadSequence) {
+        return {
+            provider: null,
+            formatIssue: false
+        };
+    }
+
+    if (response.status === 404) {
+        return {
+            provider: null,
+            formatIssue: false
+        };
+    }
+
+    if (!response.ok) {
+        return {
+            provider: null,
+            formatIssue: false
+        };
+    }
+
+    const text = await response.text();
+    const lines = text
+        .replace(/\r\n/g, "\n")
+        .replace(/\r/g, "\n")
+        .split("\n");
+
+    if (lines.length === 0 || lines[0].trim().length === 0) {
+        return {
+            provider: null,
+            formatIssue: true
+        };
+    }
+
+    const endpoint = parseProviderUrl(lines[0].trim());
+
+    if (endpoint === null) {
+        return {
+            provider: null,
+            formatIssue: true
+        };
+    }
+
+    if (!allowedHosts.has(endpoint.hostname.toLowerCase())) {
+        return {
+            provider: null,
+            formatIssue: true
+        };
+    }
+
+    const variables = [];
+
+    for (let index = 1; index < lines.length; index++) {
+        const name = lines[index].trim();
+
+        if (name.length === 0) {
+            continue;
+        }
+
+        variables.push(name);
+    }
+
+    return {
+        provider: {
+            url: endpoint.href,
+            variables: variables
+        },
+        formatIssue: false
+    };
+}
+
+function parseProviderUrl(text) {
+    try {
+        const directUrl = new URL(text);
+
+        if (directUrl.protocol !== "http:" && directUrl.protocol !== "https:") {
+            return null;
+        }
+
+        return directUrl;
+    } catch {
+        try {
+            return new URL("https://" + text);
+        } catch {
+            return null;
+        }
+    }
+}
+
+async function callProvider(values) {
+    if (provider === null) {
+        throw new Error("No Provider connected.");
+    }
+
+    const requestUrl = new URL(provider.url);
+
+    for (const variableName of provider.variables) {
+        if (!Object.prototype.hasOwnProperty.call(values, variableName)) {
+            continue;
+        }
+
+        requestUrl.searchParams.set(
+            variableName,
+            values[variableName]);
+    }
+
+    return fetch(requestUrl.href, {
+        method: "GET",
+        cache: "no-store"
+    });
 }
 
 async function getAllowedHosts() {
@@ -287,6 +439,7 @@ function showNotInSystem(requestNumber) {
     }
 
     topLevelSymbol = null;
+    provider = null;
     setAgentConnected(false);
     ruleBaseStatus.textContent = NOT_IN_SYSTEM;
 }
@@ -297,6 +450,7 @@ function showFormatIssues(requestNumber) {
     }
 
     topLevelSymbol = null;
+    provider = null;
     setAgentConnected(false);
     ruleBaseStatus.textContent = FORMAT_ISSUES;
 }
