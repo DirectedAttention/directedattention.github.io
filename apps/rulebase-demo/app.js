@@ -25,9 +25,13 @@ const output = document.getElementById("output");
 let loadTimer = null;
 let loadSequence = 0;
 let topLevelSymbol = null;
+let agentConnected = false;
+
+setAgentConnected(false);
 
 ruleBaseUrlInput.addEventListener("input", function () {
     clearTimeout(loadTimer);
+    setAgentConnected(false);
 
     const urlText = ruleBaseUrlInput.value.trim();
 
@@ -50,6 +54,7 @@ ruleBaseUrlInput.addEventListener("keydown", function (event) {
 
     event.preventDefault();
     clearTimeout(loadTimer);
+    setAgentConnected(false);
 
     const urlText = ruleBaseUrlInput.value.trim();
 
@@ -181,6 +186,7 @@ async function inspectAgenticFormUrl(urlText) {
     }
 
     topLevelSymbol = selectedTopLevelSymbol;
+    setAgentConnected(true);
 
     reports.push("Top level: " + topLevelSymbol);
     ruleBaseStatus.textContent = reports.join("\n");
@@ -263,12 +269,25 @@ function countLines(text) {
     return parts.length;
 }
 
+function setAgentConnected(isConnected) {
+    agentConnected = isConnected;
+    sentenceInput.disabled = !isConnected;
+    processButton.disabled = !isConnected;
+
+    if (isConnected) {
+        sentenceInput.placeholder = "Type a sentence here.";
+    } else {
+        sentenceInput.placeholder = "Connect an Agentic Form first.";
+    }
+}
+
 function showNotInSystem(requestNumber) {
     if (requestNumber !== loadSequence) {
         return;
     }
 
     topLevelSymbol = null;
+    setAgentConnected(false);
     ruleBaseStatus.textContent = NOT_IN_SYSTEM;
 }
 
@@ -278,5 +297,6 @@ function showFormatIssues(requestNumber) {
     }
 
     topLevelSymbol = null;
+    setAgentConnected(false);
     ruleBaseStatus.textContent = FORMAT_ISSUES;
 }
